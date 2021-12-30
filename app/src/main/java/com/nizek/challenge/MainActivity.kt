@@ -1,4 +1,4 @@
-package com.example.nizek
+package com.nizek.challenge
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

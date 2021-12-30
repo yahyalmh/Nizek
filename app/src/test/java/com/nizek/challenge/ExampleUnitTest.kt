@@ -1,4 +1,4 @@
-package com.example.nizek
+package com.nizek.challenge
 
 import org.junit.Test
 

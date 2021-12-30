@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Nizek"
 include ':app'
+include ':custom_button'
