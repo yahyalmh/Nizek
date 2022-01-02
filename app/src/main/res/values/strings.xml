@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Nizek</string>
     <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
