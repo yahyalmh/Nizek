@@ -45,6 +45,7 @@ class UserConfig private constructor(context: Context) {
     }
 
     fun save(user: User) {
+        this.user = user
         sharedPreferences.edit {
             this.putString(Config.FULL_NAME_PREF_KEY, user.fullName)
             this.putString(Config.USERNAME_PREF_KEY, user.username)
