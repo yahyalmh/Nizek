@@ -79,25 +79,25 @@ class LayoutHelper {
 
         fun createLinear(
             context: Context,
-            width: Int,
-            height: Int,
+            width: Float,
+            height: Float,
             weight: Float,
             gravity: Int,
-            leftMargin: Int,
-            topMargin: Int,
-            rightMargin: Int,
-            bottomMargin: Int
+            leftMargin: Float,
+            topMargin: Float,
+            rightMargin: Float,
+            bottomMargin: Float
         ): LinearLayout.LayoutParams {
             val layoutParams = LinearLayout.LayoutParams(
-                getSize(context, width.toFloat()),
-                getSize(context, height.toFloat()),
+                getSize(context, width),
+                getSize(context, height),
                 weight
             )
             layoutParams.setMargins(
-                AndroidUtils.dp(context, leftMargin.toFloat()).toInt(),
-                AndroidUtils.dp(context, topMargin.toFloat()).toInt(),
-                AndroidUtils.dp(context, rightMargin.toFloat()).toInt(),
-                AndroidUtils.dp(context, bottomMargin.toFloat()).toInt()
+                AndroidUtils.dp(context, leftMargin).toInt(),
+                AndroidUtils.dp(context, topMargin).toInt(),
+                AndroidUtils.dp(context, rightMargin).toInt(),
+                AndroidUtils.dp(context, bottomMargin).toInt()
             )
             layoutParams.gravity = gravity
             return layoutParams
@@ -113,13 +113,13 @@ class LayoutHelper {
 
         fun createLinear(
             context: Context,
-            width: Int,
-            height: Int,
+            width: Float,
+            height: Float,
             gravity: Int
         ): LinearLayout.LayoutParams {
             val layoutParams = LinearLayout.LayoutParams(
-                getSize(context, width.toFloat()),
-                getSize(context, height.toFloat())
+                getSize(context, width),
+                getSize(context, height)
             )
             layoutParams.gravity = gravity
             return layoutParams
@@ -127,14 +127,14 @@ class LayoutHelper {
 
         fun createLinear(
             context: Context,
-            width: Int,
-            height: Int,
+            width: Float,
+            height: Float,
             weight: Float,
             gravity: Int
         ): LinearLayout.LayoutParams {
             val layoutParams = LinearLayout.LayoutParams(
-                getSize(context, width.toFloat()),
-                getSize(context, height.toFloat()), weight
+                getSize(context, width),
+                getSize(context, height), weight
             )
             layoutParams.gravity = gravity
             return layoutParams
