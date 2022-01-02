@@ -10,6 +10,7 @@ import android.app.Application
 class ApplicationLoader : Application() {
     override fun onCreate() {
         super.onCreate()
+        SessionManager()
         UserConfig.getInstance(applicationContext)
     }
 }
