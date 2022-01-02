@@ -1,11 +1,11 @@
 package com.nizek.custom_button
 
-import android.R
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import com.nizek.helper.AndroidUtils
 import com.nizek.helper.LayoutHelper
 
@@ -23,8 +24,15 @@ import com.nizek.helper.LayoutHelper
  * @since 30th December 2021
  */
 
-class CustomizableGenericButton private constructor(context: Context, params: ButtonParams) :
-    LinearLayout(context) {
+class CustomizableGenericButton private constructor(
+    context: Context,
+    attrs: AttributeSet?,
+    params: ButtonParams
+) :
+    LinearLayout(context, attrs) {
+    private var titleTextColor: Int = 0
+    private var subtitleTextColor: Int = 0
+    private var borderColor: Int = 0
     private var icon: ImageView? = null
     private var iconId: Int = 0
 
@@ -43,6 +51,8 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
             AndroidUtils.dp(context, 5f).toInt(),
             AndroidUtils.dp(context, 1f).toInt()
         )
+
+        initAttributeSet(attrs)
         setBorder()
 
         params.apply(this)
@@ -51,13 +61,33 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
 
     }
 
-    private fun setBorder() {
-        val radius = 5 //radius will be 5px
+    private fun initAttributeSet(attrs: AttributeSet?) {
+        attrs?.let {
+            val typedArray =
+                context.obtainStyledAttributes(it, R.styleable.CustomizableGenericButton)
+            borderColor = typedArray.getResourceId(
+                R.styleable.CustomizableGenericButton_borderColor,
+                android.R.color.black
+            )
+            titleTextColor = typedArray.getResourceId(
+                R.styleable.CustomizableGenericButton_titleTextColor,
+                android.R.color.black
+            )
+            subtitleTextColor = typedArray.getResourceId(
+                R.styleable.CustomizableGenericButton_subtitleTextColor,
+                android.R.color.black
+            )
+            typedArray.recycle()
+        }
+    }
 
-        val strokeWidth = 2
+    private fun setBorder() {
+        val radius = 12 //radius will be 5px
+
+        val strokeWidth = 3
         val shape = GradientDrawable()
         shape.cornerRadius = radius.toFloat()
-        shape.setStroke(strokeWidth, resources.getColor(R.color.black))
+        shape.setStroke(strokeWidth, borderColor)
         background = shape
     }
 
@@ -97,6 +127,7 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
         titleTxtView = TextView(context).apply {
             text = title
             setTypeface(null, Typeface.BOLD)
+            setTextColor(titleTextColor)
             setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12f)
         }
 
@@ -118,6 +149,7 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
     private fun addSubTitle(context: Context, titleContentView: LinearLayout) {
         subTitleTextView = TextView(context).apply {
             text = subTitle
+            setTextColor(subtitleTextColor)
             setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12f)
             isSingleLine = true
         }
@@ -178,10 +210,10 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         super.onInterceptHoverEvent(event)
         val animatorSet = AnimatorSet()
-        val translationX: ObjectAnimator = ObjectAnimator.ofFloat(this, "scaleX", 0.8f, 1f)
-        val translationY: ObjectAnimator = ObjectAnimator.ofFloat(this, "scaleY", 0.8f, 1f)
+        val translationX: ObjectAnimator = ObjectAnimator.ofFloat(this, "scaleX", 0.9f, 1f)
+        val translationY: ObjectAnimator = ObjectAnimator.ofFloat(this, "scaleY", 0.9f, 1f)
         animatorSet.playTogether(translationX, translationY)
-        animatorSet.duration = 260
+        animatorSet.duration = 270
         animatorSet.interpolator = AccelerateInterpolator()
         animatorSet.start()
         return super.onTouchEvent(event)
@@ -206,18 +238,18 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
             return this
         }
 
-//        fun setFirstOption(text: String, listener: OptionalDialogClickListener): Builder {
-//            params.mFirstOption = text
-//            params.mFirstOptionListener = listener
-//            return this
-//        }
+        fun setAttributeSet(attrs: AttributeSet): Builder {
+            params.attrs = attrs
+            return this
+        }
 
         fun build(): CustomizableGenericButton {
-            return CustomizableGenericButton(context, params)
+            return CustomizableGenericButton(context, params.attrs, params)
         }
     }
 
     class ButtonParams {
+        var attrs: AttributeSet? = null
         var mIconId: Int = 0
         var mTitle: String? = null
         var mSubTitle: String? = null
@@ -226,8 +258,6 @@ class CustomizableGenericButton private constructor(context: Context, params: Bu
             button.iconId = mIconId
             button.title = mTitle
             button.subTitle = mSubTitle
-
-//            dialog.firstOptionListener = mFirstOptionListener
         }
     }
 }

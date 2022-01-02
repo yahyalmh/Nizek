@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomizableGenericButton">
+        <attr name="borderColor" format="color" />
+        <attr name="titleTextColor" format="color" />
+        <attr name="subtitleTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomButtonStyle">
+        <attr name="customizableButtonStyle" format="reference" />
+    </declare-styleable>
+</resources>
