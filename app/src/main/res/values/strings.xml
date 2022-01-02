@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Nizek</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="logout">Logout</string>
+    <string name="fullName">FullName</string>
+    <string name="username">Username</string>
+    <string name="fillUserName">Please fill username</string>
+    <string name="fillPassword">Please fill password</string>
+    <string name="fillFullName">Please fill full name</string>
+    <string name="usernameOrPassWrong">Username or password is wrong</string>
+    <string name="userLoginException">An exception occurred while login user</string>
+    <string name="userSavingException">An exception occurred while saving user</string>
+
+    <string name="passwordLengthWarning">Password length should not be less than %1$s</string>
+    <string name="welcomeMessage">Welcome %1$s</string>
+    <string name="userNullWarning">User can not be null</string>
 </resources>
