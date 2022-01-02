@@ -30,9 +30,9 @@ class CustomizableGenericButton private constructor(
     params: ButtonParams
 ) :
     LinearLayout(context, attrs) {
-    private var titleTextColor: Int = 0
-    private var subtitleTextColor: Int = 0
-    private var borderColor: Int = 0
+    private var titleTextColor: Int = android.R.color.black
+    private var subtitleTextColor: Int = android.R.color.black
+    private var borderColor: Int = android.R.color.black
     private var icon: ImageView? = null
     private var iconId: Int = 0
 
@@ -87,7 +87,7 @@ class CustomizableGenericButton private constructor(
         val strokeWidth = 3
         val shape = GradientDrawable()
         shape.cornerRadius = radius.toFloat()
-        shape.setStroke(strokeWidth, borderColor)
+        shape.setStroke(strokeWidth, ContextCompat.getColor(context, borderColor))
         background = shape
     }
 
@@ -127,7 +127,7 @@ class CustomizableGenericButton private constructor(
         titleTxtView = TextView(context).apply {
             text = title
             setTypeface(null, Typeface.BOLD)
-            setTextColor(titleTextColor)
+            setTextColor(ContextCompat.getColor(context, titleTextColor))
             setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12f)
         }
 
@@ -149,7 +149,7 @@ class CustomizableGenericButton private constructor(
     private fun addSubTitle(context: Context, titleContentView: LinearLayout) {
         subTitleTextView = TextView(context).apply {
             text = subTitle
-            setTextColor(subtitleTextColor)
+            setTextColor(ContextCompat.getColor(context, subtitleTextColor))
             setTextSize(TypedValue.COMPLEX_UNIT_DIP, 12f)
             isSingleLine = true
         }
